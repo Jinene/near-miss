@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Near Miss</title>
+<meta name="description" content="Every close pass between active satellites, screened live in your browser.">
+<link rel="stylesheet" href="src/fonts.css">
+<link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+<main class="app">
+  <canvas id="globe" aria-label="Globe showing live satellite positions and predicted close passes"></canvas>
+  <div id="tip" class="tip" hidden></div>
+
+  <aside id="left">
+    <header class="brand">
+      <h1>Near&nbsp;Miss</h1>
+      <p>Every close pass between active satellites, screened live in your browser.</p>
+    </header>
+
+    <section class="stats" aria-label="Summary">
+      <div class="stat lead">
+        <span class="num" id="statAll">0</span>
+        <span class="lab" id="statAllLab">passes closer than 5 km found so far</span>
+        <span class="sub" id="statRate">screening…</span>
+      </div>
+      <div class="stat">
+        <span class="num alert" id="statOne">0</span>
+        <span class="lab">of them closer than 1 km</span>
+      </div>
+      <button class="stat link" id="statBestBtn" type="button">
+        <span class="num" id="statBest">–</span>
+        <span class="lab">closest pass found</span>
+        <span class="sub" id="statBestSub">&nbsp;</span>
+      </button>
+      <div class="stat">
+        <span class="num" id="statSats">–</span>
+        <span class="lab">active satellites tracked</span>
+      </div>
+    </section>
+
+    <section class="histbox" aria-label="Crowding by altitude">
+      <h2>Crowding by altitude</h2>
+      <p class="histnote">Bar heights use a square-root scale.</p>
+      <div class="histrow"><span class="key up"></span>satellites per 50 km band, tallest <b id="histMaxS">–</b></div>
+      <div id="hist" class="hist"></div>
+      <div class="axis"><span>300</span><span>550</span><span>800</span><span>1,050</span><span>1,300 km</span></div>
+      <div class="histrow"><span class="key down"></span>close passes per band, tallest <b id="histMaxE">–</b></div>
+    </section>
+
+    <section class="legend" aria-label="Legend">
+      <span><i class="dot starlink"></i>Starlink <b id="legStarlink"></b></span>
+      <span><i class="dot leo"></i>Other low orbit <b id="legLeo"></b></span>
+      <span><i class="dot high"></i>Higher orbits <b id="legHigh"></b></span>
+      <span><i class="ring alert"></i>Pass under 1 km</span>
+      <span><i class="ring warn"></i>Under 2 km</span>
+    </section>
+
+    <footer class="note">
+      <p id="source">Orbital elements: CelesTrak.</p>
+      <p>Propagated with SGP4. Public element sets are accurate to roughly a kilometre and do not include planned manoeuvres, so treat distances as estimates. Not for operational use.</p>
+    </footer>
+  </aside>
+
+  <section class="bar" aria-label="Time controls">
+    <div class="controls">
+      <span class="clock" id="clock">–</span>
+      <button class="btn live on" id="liveBtn" type="button">Live</button>
+      <div class="seg" role="group" aria-label="Playback speed">
+        <button type="button" data-speed="1" aria-pressed="true">1×</button>
+        <button type="button" data-speed="10" aria-pressed="false">10×</button>
+        <button type="button" data-speed="60" aria-pressed="false">60×</button>
+      </div>
+      <div class="seg" role="group" aria-label="Zoom">
+        <button type="button" id="zoomOut" aria-label="Zoom out">−</button>
+        <button type="button" id="zoomIn" aria-label="Zoom in">+</button>
+      </div>
+    </div>
+    <div class="progress"><div class="track"><div class="fill" id="progFill"></div></div><span id="progText">Loading the catalogue…</span></div>
+  </section>
+
+  <aside id="right">
+    <section class="events" aria-label="Close passes">
+      <div class="events-head">
+        <h2>Close passes</h2><span class="count" id="listCount"></span>
+      </div>
+      <div class="filters">
+        <div class="seg" role="group" aria-label="Maximum miss distance">
+          <button type="button" data-miss="1" aria-pressed="true">Under 1 km</button>
+          <button type="button" data-miss="2" aria-pressed="false">2 km</button>
+          <button type="button" data-miss="5" aria-pressed="false">5 km</button>
+        </div>
+        <div class="seg" role="group" aria-label="Sort order">
+          <button type="button" data-sort="soonest" aria-pressed="true">Soonest</button>
+          <button type="button" data-sort="closest" aria-pressed="false">Closest</button>
+        </div>
+      </div>
+      <ul id="list" class="list"><li class="empty">Loading the catalogue…</li></ul>
+    </section>
+    <section id="detail" class="detail" aria-live="polite" hidden></section>
+  </aside>
+</main>
+
+<script src="vendor/satellite.min.js"></script>
+<script src="vendor/d3-array.min.js"></script>
+<script src="vendor/d3-geo.min.js"></script>
+<script src="data/land.js"></script>
+<script src="data/tle-snapshot.js"></script>
+<script src="src/catalog.js"></script>
+<script src="src/screening.js"></script>
+<script src="src/globe.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 Near Miss loads the public catalogue of active satellites, propagates all of them with SGP4, and runs an all-on-all conjunction screen for the next three hours. Nothing runs on a server: the orbital mechanics, the screening and the rendering all happen in the page.
 
-![Overview](docs/01-overview.jpg)
+![Overview](docs/01-overview.png)
 
 On the 12 November 2026 catalogue (15,880 active satellites) it finds:
 
@@ -25,7 +25,7 @@ These are geometric estimates from public element sets, not operational conjunct
 - **Watch this pass** jumps the clock to 80 seconds before closest approach and plays it at 10×, with a live separation readout.
 - The altitude chart shows where satellites are concentrated and where the close passes happen.
 
-![A close pass](docs/02-close-pass.jpg)
+![A close pass](docs/02-close-pass.png)
 
 ## How the screening works
 
@@ -78,7 +78,7 @@ vendor/           satellite.js 5.0.0, d3-geo, d3-array
 data/             catalogue snapshot, Natural Earth land outline
 tools/            fetch-tle.sh
 tests/            screener vs brute force
-docs/             screenshots
+docs/             screenshots and demo video
 ```
 
 ## Accuracy

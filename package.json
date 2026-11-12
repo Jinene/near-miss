@@ -1,0 +1,15 @@
+{
+  "name": "near-miss",
+  "version": "1.0.0",
+  "description": "Every close pass between active satellites, screened live in the browser.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "node --test tests/screening.test.js",
+    "update-tle": "sh tools/fetch-tle.sh"
+  },
+  "devDependencies": {
+    "satellite.js": "5.0.0"
+  }
+}
